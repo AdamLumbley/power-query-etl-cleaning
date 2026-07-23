@@ -9,5 +9,12 @@ An end-to-end data cleaning and ETL project built using Power Query to transform
 * **Column Restructuring & Splitting:** Took combined string attributes (`Department_Region`) and split them by delimiter into distinct, clean analytical dimensions (`Department` and `State`), followed by intentional header renaming and strict data type enforcement.
 * **Readable Formatting:** Maintained clean, user-friendly column casing and layout throughout the transformation steps for optimal readability.
 
+## Visualizing the Data Quality Process
+
+### 1. Diagnosing Missing Data (Column Quality Tool)
+Here is a snapshot of the raw data profiling phase, using Power Query's Column Quality tool to identify missing values and structural anomalies before transformation. You can clearly see the ~21% empty/null values in the column here, which confirmed the need for our strategic null preservation:
+
+![Column Quality Profiling](https://raw.githubusercontent.com/AdamLumbley/power-query-etl-cleaning/main/HR-column-quality-profiling.png)
+
 ## Repository Structure
 * `power_query_script.txt` - The complete, end-to-end M-code script executing the ETL transformations in Power Query.
