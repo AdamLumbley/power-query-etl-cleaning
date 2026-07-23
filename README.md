@@ -16,5 +16,10 @@ Here is a snapshot of the raw data profiling phase, using Power Query's Column Q
 
 ![Column Quality Profiling](https://raw.githubusercontent.com/AdamLumbley/power-query-etl-cleaning/main/HR-column-quality-profiling.png)
 
+### 2. Transformation Pipeline (Applied Steps Pane)
+Here is the sequential view of the Power Query Applied Steps pane, showcasing the fully audited transformation workflow from source extraction through normalization, splitting, and type enforcement:
+
+![Applied Steps Pipeline](https://raw.githubusercontent.com/AdamLumbley/power-query-etl-cleaning/main/hr-dataset-applied-steps.png)
+
 ## Repository Structure
 * `power_query_script.txt` - The complete, end-to-end M-code script executing the ETL transformations in Power Query.
