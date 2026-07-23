@@ -1,0 +1,13 @@
+let
+    Source = Csv.Document(File.Contents("C:\Users\adamw\Downloads\Kaggle - Messy Employee Dataset\Messy_Employee_dataset.csv"),[Delimiter=",", Columns=12, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Employee_ID", type text}, {"First_Name", type text}, {"Last_Name", type text}, {"Age", Int64.Type}, {"Department_Region", type text}, {"Status", type text}, {"Join_Date", type date}, {"Salary", type text}, {"Email", type text}, {"Phone", Int64.Type}, {"Performance_Score", type text}, {"Remote_Work", type logical}}),
+    #"Renamed Columns" = Table.RenameColumns(#"Changed Type",{{"Employee_ID", "Employee ID"}, {"First_Name", "First Name"}, {"Last_Name", "Last Name"}}),
+    #"Split Column by Delimiter" = Table.SplitColumn(#"Renamed Columns", "Department_Region", Splitter.SplitTextByDelimiter("-", QuoteStyle.Csv), {"Department_Region.1", "Department_Region.2"}),
+    #"Changed Type1" = Table.TransformColumnTypes(#"Split Column by Delimiter",{{"Department_Region.1", type text}, {"Department_Region.2", type text}}),
+    #"Renamed Columns1" = Table.RenameColumns(#"Changed Type1",{{"Department_Region.1", "Department"}, {"Department_Region.2", "State"}, {"Join_Date", "Join Date"}, {"Performance_Score", "Performance Score"}, {"Remote_Work", "Remote Work"}}),
+    #"Replaced Value" = Table.ReplaceValue(#"Renamed Columns1","N/A","",Replacer.ReplaceText,{"Salary"}),
+    #"Changed Type2" = Table.TransformColumnTypes(#"Replaced Value",{{"Salary", type number}, {"Phone", type text}}),
+    #"Replaced Value1" = Table.ReplaceValue(#"Changed Type2","-","",Replacer.ReplaceText,{"Phone"})
+in
+    #"Replaced Value1"
